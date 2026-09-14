@@ -1,0 +1,43 @@
+THREADLEAF - IMPLEMENTED PROTOTYPE AND API USE CASE
+
+Benefit / purpose
+Threadleaf is a lightweight desktop reader for personal, non-commercial Reddit
+browsing. It provides a focused interface for selecting a community, browsing
+post titles, and reading post text and top-level comments.
+
+Application behavior
+The user signs in through Reddit's browser-based OAuth flow. Threadleaf requests
+only the read scope. When the user loads a community, the client retrieves up to
+25 posts sorted by hot, new, or top (day). Selecting a post retrieves up to 20
+top-level comments. The user can open the discussion on Reddit in their browser.
+Requests are user-triggered. The client does not post, vote, send messages,
+perform moderation, or run background collection.
+
+Example
+Enter a community name, load its new posts, select a discussion, read the text
+and comments, and optionally open the discussion on Reddit.
+
+Platform requirement
+Threadleaf is a local Python/Tkinter desktop application. It needs read access
+from an installed client outside Reddit's embedded app environment, with browser
+authorization returning to a local loopback callback.
+
+Technical details
+Client type: installed application; no client secret.
+Redirect URI: http://127.0.0.1:8765/callback
+OAuth scope: read
+API endpoints: /r/{community}/hot, /new, /top; /comments/{post_id}
+User agent: desktop:threadleaf:0.1 (by /u/USERNAME)
+Tokens and retrieved content remain in process memory; no persistent content
+storage, analytics, bulk export, or scheduled requests are implemented.
+
+Communities
+The user enters a community name at runtime. Access is limited to content
+available to the authorized account. This is a general reader, not a bot
+deployed in a particular subreddit.
+
+Source and status
+Source repository: https://github.com/Eclippy/threadleaf
+The accompanying source archive contains app.py, setup instructions, and tests.
+This is a working local prototype with fictional offline demo content. Live
+OAuth and API operation still require approved credentials and live validation.
